@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 08.01.2023 16:41:20
+// Create Date: 08.01.2023 20:56:08
 // Design Name: 
-// Module Name: ALU32bit
+// Module Name: Datapath
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,21 +19,17 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-module ALU32bit(
-       input [31:0] A,
-       input [31:0] B,
-       input AInvert,
-       input BNegate,
-       input [1:0] Op,
-       output Zero,
-       output [24:0] Result,
-       output Overflow,
-       output CarryOut
+module XOR(
+        input A,
+        input B,
+        output Out
     );
-    
-    wire [32:0] COUT;
-    
-    
-    
+    always @* begin
+    case({A,B})
+        2'b00: Out = 1'b0;
+        2'b01: Out = 1'b1;
+        2'b10: Out = 1'b1;
+        2'b11: Out = 1'b0;
+    endcase
+    end
 endmodule

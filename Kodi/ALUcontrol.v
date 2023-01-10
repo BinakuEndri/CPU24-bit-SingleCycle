@@ -32,14 +32,15 @@ always @(AluOp)
 begin
 case(AluOp)
      2'b00: ALUContr = 4'b0010; //ls, ss 
-     2'b01: ALUContr = 4'b0110; //beq bne
+     2'b01: ALUContr = 4'b1010; //beq bne
      2'b10:
          case(Function)
-            4'b0000: ALUContr =4'b0000; // and
+            4'b0000: ALUContr=4'b0000; //and
             4'b0001: ALUContr=4'b0001; //or
             4'b0010: ALUContr=4'b0010; //add
-            4'b0011: ALUContr=4'b0110; //sub
-            4'b0100: ALUContr=4'b0111; //slt            
+            4'b0011: ALUContr=4'b1010; //sub
+            4'b0100: ALUContr=4'b1011; //slt
+            4'b0110: ALUContr=4'b0100; //XOR            
          endcase
       2'b11:
          case(opcode)

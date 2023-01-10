@@ -20,14 +20,18 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mux4in1(
+module mux8in1(
        input andinput,
        input orinput,
        input addinput,
        input lessinput,
-       input [1:0] sel,
+       input xorinput,
+       input six,
+       input seven,
+       input eight,
+       input [2:0] sel,
        output out
     );
-    
-    assign out = sel[1] ? (sel[0] ? lessinput : addinput ):(sel[0] ? orinput : andinput);
+
+  assign out = sel[2] ? ((sel[1] ? (sel[0] ?   eight : seven ):(sel[0] ? six   : xorinput))):((sel[1] ? (sel[0] ? lessinput : addinput ):(sel[0] ? orinput : andinput)));
 endmodule

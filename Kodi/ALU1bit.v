@@ -27,12 +27,12 @@ module ALU1bit(
     input AInvert,
     input BInvert,
     input Less,
-    input [1:0] Op,
+    input [2:0] Op,
     output Result,
     output CarryOut 
     );
     
-    wire NA, NB, mA, mB, and_wire, or_wire, add_wire;
+    wire NA, NB, mA, mB, and_wire, or_wire, add_wire, xor_wire;
     
     assign NA = ~A;
     assign NB = ~B;
@@ -42,9 +42,11 @@ module ALU1bit(
     
     assign and_wire = mA & mB;
     assign or_wire = mA | mB;
-    
+
+    assign xor_wire = mA ^ mB;
+
     Adder add(mA, mB, CIN, add_wire, CarryOut);
     
-    mux4in1 mainMux(and_wire, or_wire, add_wire, Less, Op, Result);
+    mux8in1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, 0, 0, 0, Op, Result);
     
 endmodule
