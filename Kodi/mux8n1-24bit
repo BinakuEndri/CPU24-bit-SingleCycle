@@ -21,16 +21,16 @@
 
 
 module mux8in1(
-       input andinput,
-       input orinput,
-       input addinput,
-       input lessinput,
-       input xorinput,
-       input six,
-       input seven,
-       input eight,
+       input [23:0] andinput,
+       input [23:0] orinput,
+       input [23:0] addinput,
+       input [23:0] lessinput,
+       input [23:0] mulinput,
+       input [23:0] xorinput,
+       input [23:0] sllinput,
+       input [23:0] eight,
        input [2:0] sel,
-       output reg out
+       output reg [23:0] out
     );
 
     always @* begin
@@ -39,7 +39,9 @@ module mux8in1(
         3'b001: out = orinput;
         3'b010: out = addinput;
         3'b011: out = lessinput;
+        3'b100: out = mulinput;
         3'b101: out = xorinput; 
+        3'b110: out = sllinput; 
     endcase
     end
     

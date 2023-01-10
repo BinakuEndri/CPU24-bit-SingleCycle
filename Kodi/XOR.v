@@ -22,7 +22,7 @@
 module XOR(
         input A,
         input B,
-        output Out
+        output reg Out
     );
     always @* begin
     case({A,B})

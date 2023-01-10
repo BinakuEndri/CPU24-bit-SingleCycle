@@ -43,7 +43,7 @@ module ALU1bit(
     assign and_wire = mA & mB;
     assign or_wire = mA | mB;
 
-    assign xor_wire = mA ^ mB;
+    XOR xor1(mA,mB,xor_wire);
 
     Adder add(mA, mB, CIN, add_wire, CarryOut);
     

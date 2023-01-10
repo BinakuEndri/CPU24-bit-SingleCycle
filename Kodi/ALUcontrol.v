@@ -39,7 +39,7 @@ case(AluOp)
             4'b0001: ALUContr=4'b0001; //or
             4'b0010: ALUContr=4'b0010; //add
             4'b0011: ALUContr=4'b1010; //sub
-            4'b0100: ALUContr=4'b1011; //slt
+            4'b0100: ALUContr=4'b0011; //slt
             4'b0110: ALUContr=4'b0100; //XOR            
          endcase
       2'b11:
