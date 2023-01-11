@@ -42,11 +42,11 @@ module ALU1bit(
     
     assign and_wire = mA & mB;
     assign or_wire = mA | mB;
-
+    
     XOR xor1(mA,mB,xor_wire);
 
     Adder add(mA, mB, CIN, add_wire, CarryOut);
     
-    mux8in1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, 0, 0, 0, Op, Result);
+    mux8in1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, 1'd0, 1'd0, 1'd0, Op, Result);
     
 endmodule

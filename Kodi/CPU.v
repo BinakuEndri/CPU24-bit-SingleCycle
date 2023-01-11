@@ -23,7 +23,7 @@
 module CPU(input Clock);
     wire[3:0] opcode ;
     wire RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc;
-    wire [1:0] AlLUOp;
+    wire [1:0] ALUOp;
     
     Datapath DP (
     Clock,
@@ -33,9 +33,15 @@ module CPU(input Clock);
     );
     
     ControlUnit CU(
-    RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc,
+    opcode,
+    RegDst, 
+    ALUSrc,
+    Branch, 
+    MemRead,
+    MemToReg,
     ALUOp, 
-    opcode
+    MemWrite, 
+    RegWrite
     );
     
 endmodule

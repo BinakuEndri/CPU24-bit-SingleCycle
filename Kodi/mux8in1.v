@@ -19,7 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module mux8in1(
        input andinput,
        input orinput,
@@ -45,3 +44,4 @@ module mux8in1(
     
   // assign out = sel[2] ? ((sel[1] ? (sel[0] ?   eight : seven ):(sel[0] ? six   : xorinput))):((sel[1] ? (sel[0] ? lessinput : addinput ):(sel[0] ? orinput : andinput)));
 endmodule
+

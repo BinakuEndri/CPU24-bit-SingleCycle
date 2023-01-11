@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 08.01.2023 16:29:44
+// Create Date: 10.01.2023 23:45:26
 // Design Name: 
-// Module Name: mux4in1
+// Module Name: mux8n1_24bit
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,11 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mux8in1(
+module mux8in1_24bit(
        input [23:0] andinput,
        input [23:0] orinput,
        input [23:0] addinput,
-       input [23:0] lessinput,
+       input [23:0] sltinput,
        input [23:0] mulinput,
        input [23:0] xorinput,
        input [23:0] sllinput,
@@ -38,7 +38,7 @@ module mux8in1(
         3'b000: out = andinput;
         3'b001: out = orinput;
         3'b010: out = addinput;
-        3'b011: out = lessinput;
+        3'b011: out = sltinput;
         3'b100: out = mulinput;
         3'b101: out = xorinput; 
         3'b110: out = sllinput; 

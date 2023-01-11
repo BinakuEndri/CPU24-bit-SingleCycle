@@ -33,7 +33,7 @@ module Datapath(
     wire[3:0] muxRegWrite; //T6
     wire[23:0] readData1, readData2, writeData, // T7,T8,T9
     mul_ALU, ALU_Out, Extender, memToMux, // T10.T11,T12,T13
-    shift2Beq, shift2Jump, branchAdderToMux, beqAddress, jumpAddress;//T14,T15,T16,T17,T18
+    branchAdderToMux, beqAddress, jumpAddress;//T14,T15,T16,T17,T18
     wire[3:0] ALUCtrl;// T19
     wire zeroof, overflow, carryout; //T20,T21,T22
     wire andMuxBranch;//T23
@@ -50,9 +50,7 @@ module Datapath(
     end
     
     assign pc3 = pc_initial +3;
-    
-    assign  shift2beq ={{9{instruction[10]}}, instruction[10:0], 2'b00};
-    
+        
     InstructionMemory IM(pc_initial, instruction);
     
     assign muxRegWrite = (RegDst == 1'b1) ? instruction[11:8] : instruction[15:12];
@@ -65,7 +63,7 @@ module Datapath(
 
     ALUcontrol AC(ALUOp, instruction[3:0], instruction[23:20], ALUCtrl); 
 
-    ALU24bit ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2], ALUCtrl[1:0], zeroof, ALU_Out, overflow, carryout);
+    ALU24bit ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2:0], zeroof, ALU_Out, overflow, carryout);
 
     DataMemory DM(ALU_Out, readData2, MemWrite, MemRead, Clock, memToMux);
 
@@ -73,7 +71,7 @@ module Datapath(
 
     assign andMuxBranch = zeroof & Branch;
 
-    assign beqAddress = pc3 + shift2beq; 
+    assign beqAddress = pc3 + Extender; 
 
     assign pcbeq = (andMuxBranch == 1'b1) ? beqAddress : pc3;
 
