@@ -27,7 +27,13 @@ module CPU(input Clock);
     
     Datapath DP (
     Clock,
-    RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc,
+    RegDst, 
+    Branch, 
+    MemRead, 
+    MemWrite, 
+    RegWrite, 
+    MemToReg, 
+    ALUSrc,
     ALUOp, 
     opcode
     );

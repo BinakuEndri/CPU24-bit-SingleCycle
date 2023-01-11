@@ -25,9 +25,6 @@ module mux8in1(
        input addinput,
        input lessinput,
        input xorinput,
-       input six,
-       input seven,
-       input eight,
        input [2:0] sel,
        output reg out
     );

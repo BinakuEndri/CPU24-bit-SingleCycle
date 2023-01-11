@@ -28,7 +28,6 @@ module mux8in1_24bit(
        input [23:0] mulinput,
        input [23:0] xorinput,
        input [23:0] sllinput,
-       input [23:0] eight,
        input [2:0] sel,
        output reg [23:0] out
     );
