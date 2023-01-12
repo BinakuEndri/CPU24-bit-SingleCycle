@@ -39,9 +39,8 @@ module ALU24bit(
     wire [23:0] Resultalu1bit;
     wire [23:0] Sllwire;
     wire [47:0] MulWire;
+    wire [23:0] Zgjero;
     wire [23:0] SltWire;
-    wire [5:0] ShiftValueWire;
-
     
     ALU1bit ALU0(A[0],B[0],BNegate, AInvert, BNegate, Result[23], Op, Resultalu1bit[0],COUT[0]);
     ALU1bit ALU1(A[1],B[1],COUT[0], AInvert, BNegate, 1'b0 , Op, Resultalu1bit[1],COUT[1]);
@@ -84,15 +83,15 @@ module ALU24bit(
                     
     assign Overflow = COUT[22] ^ CarryOut;
 
-    assign ShiftValueWire = SHAMT + B;
+    assign Zgjero = {20'b0, SHAMT[3:0]};
 
-    assign Sllwire = A << ShiftValueWire;
+    Sll sll1(A,B,Zgjero,Sllwire);
 
     SLT slt1(A,B,SltWire);
     
     assign MulWire = A * B;
 
 
-    mux8in1_24bit mux2(Resultalu1bit,Resultalu1bit,Resultalu1bit, SltWire, MulWire, Resultalu1bit,Sllwire, Op, Result,MulOUT);
+    mux8n2_24bit mux2(Resultalu1bit,Resultalu1bit,Resultalu1bit, SltWire, MulWire, Resultalu1bit,Sllwire, Op, Result,MulOUT);
     
 endmodule

@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mux8in1_24bit(
+module mux8n1_24bit(
        input [23:0] andinput,
        input [23:0] orinput,
        input [23:0] addinput,
@@ -40,7 +40,7 @@ module mux8in1_24bit(
         3'b011: out = sltinput;
         3'b100: out = mulinput;
         3'b101: out = xorinput; 
-        3'b110: out = sllinput; 
+        3'b110: out = sllinput;
     endcase
     end
     

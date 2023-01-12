@@ -25,8 +25,14 @@ module mux2n1_24bit(
        input [23:0]Input0,
        input [23:0]Input1,
        input Sel,
-       output [23:0]Out
+       output reg [23:0]Out
     );
     
-    assign Out = Sel ? Input1 : Input0;
+
+    always @* begin
+    case(sel)
+        1'b0: Out = Input0;
+        1'b1: Out = Input1;
+    endcase
+    end
 endmodule

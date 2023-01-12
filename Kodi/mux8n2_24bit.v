@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mux8in2_24bit(
+module mux8n2_24bit(
        input [23:0] andinput,
        input [23:0] orinput,
        input [23:0] addinput,
