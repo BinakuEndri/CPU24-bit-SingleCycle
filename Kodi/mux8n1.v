@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module mux8n1(
+module mux8in1(
        input andinput,
        input orinput,
        input addinput,

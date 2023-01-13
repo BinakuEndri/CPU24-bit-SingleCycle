@@ -30,10 +30,11 @@ module mux2n1_4bit(
 
    
     always @* begin
-    case(sel)
+    case(Sel)
         1'b0: Out = Input0;
         1'b1: Out = Input1;
     endcase
     end
     
 endmodule
+

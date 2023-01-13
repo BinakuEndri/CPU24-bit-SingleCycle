@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10.01.2023 23:50:34
+// Create Date: 12.01.2023 12:32:14
 // Design Name: 
-// Module Name: XOR
+// Module Name: InstructionMemory_Test
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module XOR(
-        input A,
-        input B,
-        output reg Out
-    );
-    always @* begin
-    case({A,B})
-        2'b00: Out = 1'b0;
-        2'b01: Out = 1'b1;
-        2'b10: Out = 1'b1;
-        2'b11: Out = 1'b0;
-    endcase
-    end
+module InstructionMemory_Test();
+reg[23:0] PC;
+wire[23:0] Instruction;
+
+initial
+begin
+#0 PC=23'd16;
+end
+
+InstructionMemory IM(PC, Instruction);
 endmodule

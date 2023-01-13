@@ -20,8 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ControlUnit(
+
+module Controlunit(
     input [3:0] OPCODE,
+    input [3:0] Function,
     output reg RegDst,
     output reg AluSrc,
     output reg Branch,
@@ -35,20 +37,38 @@ module ControlUnit(
  always @ (OPCODE)
 begin
 case(OPCODE)
-6'b0110: //PER R-FORMAT
+4'b0110: //PER R-FORMAT
     begin
-    RegDst = 1;
-    AluSrc = 0;
-    MemToReg = 0;
-    RegWrite = 1;
-    MemRead = 0;
-    MemWrite = 0;
-    Branch = 0;
-    AluOP[1] = 1;
-    AluOP[0] = 0;
+    case(Function)
+        4'b0101:
+       
+            begin
+            RegDst = 1'bX;
+            AluSrc = 0;
+            MemToReg = 0;
+            RegWrite = 1'bX;
+            MemRead = 0;
+            MemWrite = 0;
+            Branch = 0;
+            AluOP[1] = 1;
+            AluOP[0] = 1;
+            end
+        default:
+            begin
+            RegDst = 1;
+            AluSrc = 0;
+            MemToReg = 0;
+            RegWrite = 1;
+            MemRead = 0;
+            MemWrite = 0;
+            Branch = 0;
+            AluOP[1] = 1;
+            AluOP[0] = 0;
+            end
+    endcase
     end
 
-6'b0010: //PER LS
+4'b0010: //PER LS
     begin
     RegDst = 0;
     AluSrc = 1;
@@ -61,7 +81,7 @@ case(OPCODE)
     AluOP[0] = 0;
     end 
     
-6'b0011: //PER SS
+4'b0011: //PER SS
     begin
     RegDst = 1'bX;
     AluSrc = 1;
@@ -74,7 +94,7 @@ case(OPCODE)
     AluOP[0] = 0;
     end 
     
-6'b0100: //PER BEQ
+4'b0100: //PER BEQ
     begin
     RegDst = 0;
     AluSrc = 0;
@@ -86,7 +106,7 @@ case(OPCODE)
     AluOP[1] = 0;
     AluOP[0] = 1;
     end 
-6'b0001: //PER ADDI
+4'b0001: //PER ADDI
     begin
     RegDst = 0;
     AluSrc = 1;
@@ -103,3 +123,4 @@ endcase
 end
     
 endmodule
+

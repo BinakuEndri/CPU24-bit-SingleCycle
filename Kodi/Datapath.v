@@ -8,7 +8,7 @@ input Clock, //HYRJE NGA CPU - TELI CPU_IN_1
 input RegDst, Branch, MemRead, 
 MemWrite, RegWrite, MemToReg, ALUSrc, //HYRJET NGA CU - TELAT CU_OUT_x
 input [1:0] ALUOp, //HYRJE NGA CU - TELAT CU_OUT_x
-output [3:0] opcode //DALJE PER NE CU - TELI D_OUT_1
+output [3:0] opcode , Function //DALJE PER NE CU - TELI D_OUT_1
 );
 
 //SHIKO FOTO DATAPATH.PDF
@@ -21,7 +21,9 @@ mux_ALU, ALU_Out, Zgjerimi, memToMux, //TELAT T10-T13
 beqAddress; //TELAT T14-T18 
 wire[3:0] ALUCtrl; //TELI T19
 wire zerof, overflow, carryout,carry; // TELAT T20-T22
-wire andMuxBranch; //TELI T23
+wire andMuxBranch, muxtomul; //TELI T23
+wire [47:0] Mulwire; //TELI T23
+
 
 initial
 begin
@@ -61,7 +63,9 @@ mux2n1_24bit ALUMux(readData2, Zgjerimi, ALUSrc, mux_ALU);
 ALUcontrol AC(ALUOp, instruction[3:0], instruction[23:20], ALUCtrl); 
 
 //inicializimi i ALU (T7, T10, T19[3], T19[2], T19[1:0], T20, T11, T21, T22)
-ALU24bit ALU(readData1, mux_ALU, 1'b0, ALUCtrl[3], ALUCtrl[2:0],instruction[7:4] ,zerof, ALU_Out, overflow, carryout);
+ALU24bit ALU(readData1, mux_ALU, 1'b0, ALUCtrl[3],ALUCtrl[2:0],instruction[7:4] ,zerof, ALU_Out,overflow, carryout,Mulwire);
+
+MulFile MF(Mulwire,muxtomul,Clock);
 
 //inicializimi i Data Memory (T11, T8, CU_OUT_x, CU_OUT_x, CPU_IN_1, T13) 
 DataMemory DM(ALU_Out, readData2, MemWrite, MemRead, Clock, memToMux);
@@ -69,6 +73,8 @@ DataMemory DM(ALU_Out, readData2, MemWrite, MemRead, Clock, memToMux);
 //T9 - Teli qe i dergon te dhenat nga MUX - M3 ne Regfile
 //assign writeData = (MemToReg == 1'b1) ? memToMux : ALU_Out;
 mux2n1_24bit writeDataMux(ALU_Out, memToMux, MemToReg, writeData);
+
+mux1n1 mulwrite(ALUCtrl,muxtomul);
 
 
 //T23 - Teli qe del nga porta DHE ne pjesen e eperme te fotos (shikon nese plotesohet kushti per BEQ
@@ -87,6 +93,9 @@ mux2n1_24bit pc_nextMUx(pc3, beqAddress, andMuxBranch, pc_next);
 
 //Teli D_OUT_1 qe i dergohet CU
 assign opcode = instruction[23:20];
+assign Function = instruction[3:0];
 
 endmodule
+
+
 

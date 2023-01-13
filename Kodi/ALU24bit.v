@@ -77,7 +77,7 @@ module ALU24bit(
                 Result[12] | Result[13] | 
                 Result[14] | Result[15] | 
                 Result[16] | Result[17] | 
-                Result[18] | Result[19] | 
+                Result[18] | Result[19] |   
                 Result[20] | Result[21] | 
                 Result[22] | Result[23]); 
                     
@@ -89,7 +89,7 @@ module ALU24bit(
 
     SLT slt1(A,B,SltWire);
     
-    assign MulWire = A * B;
+    mul mul1(A,B,MulWire);
 
 
     mux8n2_24bit mux2(Resultalu1bit,Resultalu1bit,Resultalu1bit, SltWire, MulWire, Resultalu1bit,Sllwire, Op, Result,MulOUT);

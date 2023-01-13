@@ -20,8 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+
 module CPU(input Clock);
-    wire[3:0] opcode ;
+    wire[3:0] opcode , Function;
     wire RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc;
     wire [1:0] ALUOp;
     
@@ -35,11 +36,13 @@ module CPU(input Clock);
     MemToReg, 
     ALUSrc,
     ALUOp, 
-    opcode
+    opcode,
+    Function
     );
     
-    ControlUnit CU(
+    Controlunit CU(
     opcode,
+    Function,
     RegDst, 
     ALUSrc,
     Branch, 
@@ -51,3 +54,4 @@ module CPU(input Clock);
     );
     
 endmodule
+

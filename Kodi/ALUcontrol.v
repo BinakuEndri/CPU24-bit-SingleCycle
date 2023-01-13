@@ -40,13 +40,13 @@ case(AluOp)
             4'b0010: ALUContr=4'b0010; //add
             4'b0011: ALUContr=4'b1010; //sub
             4'b0100: ALUContr=4'b0011; //slt        
-            4'b0100: ALUContr=4'b0100; //mul            
-            4'b0100: ALUContr=4'b0101; //xor   
-            4'b0100: ALUContr=4'b0110; //sll                     
+            4'b0110: ALUContr=4'b0101; //xor   
+            4'b0111: ALUContr=4'b0110; //sll                     
          endcase
       2'b11:
          case(opcode)
-            4'b0001: ALUContr = 4'b0010;// addi
+            4'b0110: ALUContr=4'b0100; //mul            
+
          endcase
 endcase
 end

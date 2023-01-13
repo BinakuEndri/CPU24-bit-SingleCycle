@@ -1,11 +1,12 @@
+
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10.01.2023 23:50:34
+// Create Date: 05/13/2022 12:12:49 PM
 // Design Name: 
-// Module Name: XOR
+// Module Name: cputest
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +21,24 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module XOR(
-        input A,
-        input B,
-        output reg Out
-    );
-    always @* begin
-    case({A,B})
-        2'b00: Out = 1'b0;
-        2'b01: Out = 1'b1;
-        2'b10: Out = 1'b1;
-        2'b11: Out = 1'b0;
-    endcase
-    end
+module cputesst();
+
+
+reg Clock;
+
+integer i;
+initial
+begin
+for(i=0; i < 22; i=i+1) //30x nderro nga Clock 0 - 1, 30 tehe pozitive
+begin
+#10 Clock = 0;
+#10 Clock = 1;
+end
+
+#10 $stop;
+end
+
+
+
+CPU cpu24(Clock);
 endmodule

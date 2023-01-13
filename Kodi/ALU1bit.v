@@ -20,6 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+
 module ALU1bit(
     input A,
     input B,
@@ -37,8 +38,8 @@ module ALU1bit(
     assign NA = ~A;
     assign NB = ~B;
     
-    mux2n1 muxA(A,NA,AInvert, mA);
-    mux2n1 muxB(B,NB,BInvert, mB);
+    mux2in1 muxA(A,NA,AInvert, mA);
+    mux2in1 muxB(B,NB,BInvert, mB);
     
     assign and_wire = mA & mB;
     assign or_wire = mA | mB;
@@ -47,6 +48,6 @@ module ALU1bit(
 
     Adder add(mA, mB, CIN, add_wire, CarryOut);
     
-    mux8n1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, Op, Result);
+    mux8in1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, Op, Result);
     
 endmodule
