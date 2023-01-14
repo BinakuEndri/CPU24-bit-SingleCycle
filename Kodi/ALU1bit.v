@@ -48,6 +48,6 @@ module ALU1bit(
 
     Adder add(mA, mB, CIN, add_wire, CarryOut);
     
-    mux8in1 mainMux(and_wire, or_wire, add_wire, Less, xor_wire, Op, Result);
+    mux8in1 mainMux(and_wire, or_wire, add_wire,xor_wire, Op, Result);
     
 endmodule

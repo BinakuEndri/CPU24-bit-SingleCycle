@@ -25,14 +25,14 @@ module InstructionMemory(
         input wire[23:0] PCAddress,
         output wire[23:0] Instruction
     );
-    wire cout;
+    wire cout1, cout2;
     reg[7:0] instrMem[127:0];
 
     wire [23:0] PCAddress2;
     wire [23:0] PCAddress3;
 
-    RippleCarryAdder addAdress1(PCAddress,24'd1,1'b0,PCAddress2,cout);
-    RippleCarryAdder addAdress2(PCAddress,24'd2,1'b0,PCAddress3,cout);
+    RippleCarryAdder addAdress1(PCAddress,24'd1,1'b0,PCAddress2,cout1);
+    RippleCarryAdder addAdress2(PCAddress,24'd2,1'b0,PCAddress3,cout2);
 
 
     initial

@@ -23,10 +23,10 @@
 module SLT(
         input [23:0] mA,
         input [23:0] mB,
-  		output reg [23:0] out
+  		output [23:0] out
     );
-    
-  always @* begin
-       out = (~mA & mB) && (!(mA & ~mB));
-   end
+    wire cout;
+    wire [23:0] out1, out2, rez;
+RippleCarryAdder m0(mA, ~mB, 1'b1, rez, cout );
+ assign out = {23'b0, rez[23]};
  endmodule

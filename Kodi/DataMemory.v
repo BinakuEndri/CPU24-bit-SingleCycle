@@ -28,9 +28,13 @@ module DataMemory(
     input wire Clock,
     output wire[23:0] ReadData
     );
+    wire [23:0]  Address1,Address2;
+    wire carry1,carry2;
     
     reg[7:0] dataMem[127:0];
-    
+    RippleCarryAdder p1(Address, 24'd1, 1'b0, Address1, carry1);
+    RippleCarryAdder p2(Address, 24'd2, 1'b0, Address2, carry2);
+
     initial 
     $readmemb("dataMemory.mem", dataMem);    
     
@@ -38,9 +42,9 @@ module DataMemory(
     begin
         if(MemWrite)
             begin    
-                dataMem[Address + 24'd0] <= WriteData[23:16];
-                dataMem[Address + 24'd1] <= WriteData[15:8];
-                dataMem[Address + 24'd2] <= WriteData[7:0];
+                dataMem[Address] <= WriteData[23:16];
+                dataMem[Address1] <= WriteData[15:8];
+                dataMem[Address2] <= WriteData[7:0];
             end
     end
          
@@ -49,8 +53,10 @@ module DataMemory(
     $writememb("dataMemory.mem", dataMem);
     end
      
-     assign ReadData[23:16] = dataMem[Address + 24'd0];
-     assign ReadData[15:8] = dataMem[Address + 24'd1];
-     assign ReadData[7:0] = dataMem[Address + 24'd2];
+     
+     
+     assign ReadData[23:16] = dataMem[Address];
+     assign ReadData[15:8] = dataMem[Address1];
+     assign ReadData[7:0] = dataMem[Address2];
 
 endmodule

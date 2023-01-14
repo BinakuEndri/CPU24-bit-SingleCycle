@@ -38,7 +38,7 @@ module mux8n2_24bit(
         else if (sel == 3'b001) begin out = orinput; mulout = 24'b0; end
         else if (sel == 3'b010) begin out = addinput; mulout =24'b0; end
         else if (sel == 3'b011) begin out = sltinput; mulout =24'b0; end
-        else if (sel == 3'b100) begin out = mulinput; mulout =mulinput; end
+        else if (sel == 3'b100) begin out = mulinput; mulout = mulinput; end
         else if (sel == 3'b101) begin out = xorinput; mulout =24'b0; end
         else if (sel == 3'b110) begin out = sllinput; mulout =24'b0; end
   end

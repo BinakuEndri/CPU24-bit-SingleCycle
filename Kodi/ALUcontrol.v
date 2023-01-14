@@ -23,7 +23,6 @@
 module ALUcontrol(
        input [1:0] AluOp,
        input [3:0] Function,
-       input [3:0] opcode,
        output reg [3:0] ALUContr
     );
     
@@ -31,8 +30,8 @@ module ALUcontrol(
 always @(AluOp)
 begin
 case(AluOp)
-     2'b00: ALUContr = 4'b0010; //ls, ss 
-     2'b01: ALUContr = 4'b0110; //beq bne
+     2'b00: ALUContr = 4'b0010; //ls, ss , addi
+     2'b01: ALUContr = 4'b1010; //beq bne
      2'b10:
          case(Function)
             4'b0000: ALUContr =4'b0000; // and
@@ -43,11 +42,8 @@ case(AluOp)
             4'b0110: ALUContr=4'b0101; //xor   
             4'b0111: ALUContr=4'b0110; //sll                     
          endcase
-      2'b11:
-         case(opcode)
-            4'b0110: ALUContr=4'b0100; //mul            
+      2'b11: ALUContr=4'b0100; //mul            
 
-         endcase
 endcase
 end
 

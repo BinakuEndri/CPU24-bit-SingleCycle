@@ -40,7 +40,10 @@ module RegisterFile(
      end
      always @(posedge Clock)
      begin
-     Registers[RD] <= WriteData;
+     if(Regwrite)
+     begin
+           Registers[RD] <= WriteData;
+     end
      end
      
      assign ReadRS = Registers[RS];

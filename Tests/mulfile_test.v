@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 12.01.2023 22:19:26
+// Create Date: 13.01.2023 12:03:19
 // Design Name: 
-// Module Name: mul
+// Module Name: mulfile_test
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,27 +19,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module mul(
-  input [23:0] a,
-  input [23:0] b,
-  output reg [47:0] prod
-    );
-  reg [23:0] b_reg;
-  reg [23:0] count;
-always @*
-begin
-b_reg = b;
-prod = 0;
-count = 24'd24;
-if ((a!=0) && (b!=0))
-while (count)
-begin
 
- prod = {(({24{b_reg[0]}} & a) + prod[47:24]),prod[23:1]};
+module mulfile_test();
+reg[47:0] WriteMul;
+reg RegWrite, Clock;
+wire[47:0] Readmul;
 
-b_reg = b_reg >> 1;
-count = count - 1;
+initial
+begin
+#0 Clock=1'b0;
+#5 WriteMul = 48'd5; RegWrite=1'b1;
+#5 Clock=1'b1;
+#5 Clock=1'b0;RegWrite = 1'b1;
+#5 WriteMul = 47'd7; RegWrite=1'b1;
+#5 Clock=1'b1;
+#5 Clock=1'b0; RegWrite=0;
+#5 $stop;
+
+
 end
-end    
-    
+MulFile MF(WriteMul,RegWrite, Clock, Readmul);
 endmodule
